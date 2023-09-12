@@ -75,7 +75,7 @@ describe('Our first suite', () => {
 //Cypress style
         cy.contains('nb-card', 'Using the Grid').then(firstForm =>{
            
-            const emailLabelFirst = firstForm.find('[for="inputEmail1"]').text()
+           const emailLabelFirst = firstForm.find('[for="inputEmail1"]').text()
            const passwordLabelFirst = firstForm.find('[for="inputPassword2"]').text()
            expect(emailLabelFirst).to.equal('Email')
            expect(passwordLabelFirst).to.equal('Password')
@@ -87,5 +87,36 @@ describe('Our first suite', () => {
            })
         })
     })
+    
+    it('invoke command', () => {
+
+        cy.visit('/')
+        cy.contains('Forms').click()
+        cy.contains('Form Layouts').click()
+
+    //1
+        cy.get('[for="exampleInputEmail1"]').should('contain', 'Email address')
+    //2
+        cy.get('[for="exampleInputEmail1"]').then(label => {
+            expect(label.text()).to.equal('Email address')
+        })
+
+    //3
+        cy.get('[for="exampleInputEmail1"]').invoke('text').then(text =>{
+            expect(text).to.equal('Email address')
+        })
+
+        cy.contains('nb-card','Basic form')
+        .find('nb-checkbox')
+        .click()
+        .find('.custom-checkbox')
+        .invoke('attr', 'class')
+
+    //.should('contain', 'checked')
+        .then(classValue =>{
+            expect(classValue).to.contain('checked')
+        })
+    })
+    
 
 })
