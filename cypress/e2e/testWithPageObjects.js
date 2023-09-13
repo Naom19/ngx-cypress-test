@@ -1,4 +1,4 @@
-import { onNavigationPage } from "../support/page_objects/navigationPage"
+import { navigateTo } from "../support/page_objects/navigationPage"
 
 describe('Test with Page Objects', () => {
 
@@ -9,6 +9,9 @@ describe('Test with Page Objects', () => {
     it('verify navigation across the pages', () => {
         navigateTo.formLayoutsPage()
         navigateTo.datePickerPage()
+        navigateTo.smartTablePage()
+        navigateTo.tooltipPage()
+        navigateTo.toasterPage()
     })
 
 })
